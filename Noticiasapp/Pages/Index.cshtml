@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "JSON Data";
+}
+
+<h1>JSON Data</h1>
+
+<ul id="jsonDataList"></ul>
+
+@section Scripts {
+    <script>
+        // Função para carregar dados JSON na página
+        function loadJSONData() {
+            fetch('https://31744574-5ec6-4213-a1e0-90facfd4752f-00-3usg226eaw5ap.kirk.replit.dev/resposta1')
+                .then(response => response.json())
+                .then(data => {
+                    // Limpa a lista antes de adicionar novos itens
+                    document.getElementById('jsonDataList').innerHTML = '';
+                    // Cria um item para cada propriedade no objeto JSON
+                    for (var key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            var li = document.createElement('li');
+                            li.textContent = key + ': ' + data[key];
+                            document.getElementById('jsonDataList').appendChild(li);
+                        }
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar os dados:', error));
+        }
+
+        // Chama a função para carregar os dados quando a página carrega
+        document.addEventListener('DOMContentLoaded', loadJSONData);
+    </script>
+
+}

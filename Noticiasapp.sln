@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Noticiasapp", "Noticiasapp\Noticiasapp.csproj", "{FAD1AA9F-DD19-40AF-8B20-CE0D5635982B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAD1AA9F-DD19-40AF-8B20-CE0D5635982B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD1AA9F-DD19-40AF-8B20-CE0D5635982B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD1AA9F-DD19-40AF-8B20-CE0D5635982B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD1AA9F-DD19-40AF-8B20-CE0D5635982B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2879B4F6-A4B0-46CE-BE8A-3B70B25714DE}
+	EndGlobalSection
+EndGlobal
