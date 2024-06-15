@@ -8,75 +8,65 @@
 
 <ul id="jsonDataList"></ul>
 
+
 @section Scripts {
     <script>
         // Função para carregar dados JSON na página
-        function loadJSONData() {
-            fetch('http://127.0.0.1:5000/noticias')
-                .then(response => response.json())
-                .then(dataList => {
-                    // Limpa a lista antes de adicionar novos itens
-                    var jsonDataList = document.getElementById('jsonDataList');
-                    jsonDataList.innerHTML = '';
+        async function loadJSONData() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/noticias', {
+                    method: 'GET',
+                    mode: 'cors' // Assegura que CORS está habilitado
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                const dataList = await response.json();
 
-                    // Itera sobre a lista de objetos JSON
-                    dataList.forEach(data => {
-                        // Cria um item de lista para cada objeto
-                        var li = document.createElement('li');
+                // Limpa a lista antes de adicionar novos itens
+                var jsonDataList = document.getElementById('jsonDataList');
+                jsonDataList.innerHTML = '';
 
-                        // Adiciona classe com base na classificação
-                        li.classList.add(data.Classification === 'Feliz' ? 'feliz' : 'triste');
+                // Itera sobre a lista de objetos JSON
+                dataList.forEach(data => {
+                    // Cria um item de lista para cada objeto
+                    var li = document.createElement('li');
 
-                        // Cria elementos para cada propriedade do objeto JSON
-                        var title = document.createElement('p');
-                        title.textContent = 'Title: ' + data.Title;
-                        li.appendChild(title);
+                    // Cria elementos para cada propriedade do objeto JSON
+                    var title = document.createElement('p');
+                    title.textContent = 'Title: ' + data.Title;
+                    li.appendChild(title);
 
-                        var classification = document.createElement('p');
-                        classification.textContent = 'Classification: ' + data.Classification;
-                        li.appendChild(classification);
+                    var classification = document.createElement('p');
+                    classification.textContent = 'Classification: ' + data.Classification;
+                    li.appendChild(classification);
 
-                        var content = document.createElement('p');
-                        content.textContent = 'Content: ' + data.Content;
-                        li.appendChild(content);
+                    var content = document.createElement('p');
+                    content.textContent = 'Content: ' + data.Content;
+                    li.appendChild(content);
 
-                        var url = document.createElement('p');
-                        url.textContent = 'URL: ' + data.URL;
-                        li.appendChild(url);
+                    var url = document.createElement('p');
+                    url.textContent = 'URL: ' + data.URL;
+                    li.appendChild(url);
 
-                        // Adiciona o item de lista à lista
-                        jsonDataList.appendChild(li);
-                    });
-                })
-                .catch(error => console.error('Erro ao carregar os dados:', error));
+
+                    var hr = document.createElement('hr');
+                    li.appendChild(hr);
+
+
+                    // Adiciona o item de lista à lista
+                    jsonDataList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar os dados:', error);
+                // Exibe a mensagem de erro na página para facilitar a depuração
+                var errorMessage = document.createElement('p');
+                errorMessage.textContent = 'Erro ao carregar os dados: ' + error.message;
+                document.getElementById('jsonDataList').appendChild(errorMessage);
+            }
         }
 
         // Chama a função para carregar os dados quando a página carrega
         document.addEventListener('DOMContentLoaded', loadJSONData);
     </script>
-
-    <style>
-        .feliz {
-            float: left;
-            clear: both;
-            margin-right: 20px;
-        }
-
-        .triste {
-            float: right;
-            clear: both;
-            margin-left: 20px;
-        }
-
-        /* Linha vertical de separação */
-        .separator {
-            border-left: 1px solid black;
-            height: 100%;
-            position: absolute;
-            left: 50%;
-        }
-    </style>
 }
-
-<!-- Adiciona a linha de separação vertical -->
-<div class="separator"></div>
